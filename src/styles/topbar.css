@@ -1,0 +1,29 @@
+
+
+.topbar-contianer {
+	width: min-content;
+	display: flex;
+	font-size: 0.8rem;
+	.topbar-contianer_inner_box {
+		display: flex;
+		gap: 0.5rem;
+	}
+}
+
+.topbar-wrapper-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0 0.3rem;
+}
+
+.topbar-item {
+	display: inline-flex;
+}
+
+.topbar-item-suffix_button {
+	cursor: pointer;
+	font-size: 0.7rem;
+	padding: 0.2rem;
+	border-radius: 50%;
+}
