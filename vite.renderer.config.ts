@@ -1,3 +1,6 @@
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import type { ConfigEnv, UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 
@@ -5,8 +8,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { pluginExposeRenderer } from './vite.base.config'
-// import Components from 'unplugin-vue-components/vite';
-// import { PrimeVueResolver } from '@primevue/auto-import-resolver';
+
+const _dirname = typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
+
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>
@@ -17,6 +21,12 @@ export default defineConfig((env) => {
     root,
     mode,
     base: './',
+    resolve: {
+      alias: {
+        '~/': `${resolve(_dirname, 'src')}/`,
+      },
+      preserveSymlinks: true,
+    },
     build: {
       outDir: `.vite/renderer/${name}`,
     },
@@ -30,15 +40,7 @@ export default defineConfig((env) => {
       }),
       vue(),
       UnoCSS(),
-      // Components({
-      //   resolvers: [
-      //     PrimeVueResolver()
-      //   ]
-      // })
     ],
-    resolve: {
-      preserveSymlinks: true,
-    },
     clearScreen: false,
   } as UserConfig
 })

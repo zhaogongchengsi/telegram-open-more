@@ -4,6 +4,11 @@
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "node",
+    "paths": {
+      "~/*": [
+        "src/*"
+      ]
+    },
     "resolveJsonModule": true,
     "allowJs": true,
     "noImplicitAny": true,
