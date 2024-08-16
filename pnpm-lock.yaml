@@ -23,6 +23,9 @@ importers:
       primevue:
         specifier: ^4.0.4
         version: 4.0.4(vue@3.4.38(typescript@5.5.4))
+      std-env:
+        specifier: ^3.7.0
+        version: 3.7.0
       vue:
         specifier: ^3.4.38
         version: 3.4.38(typescript@5.5.4)
@@ -3332,6 +3335,9 @@ packages:
   statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+
+  std-env@3.7.0:
+    resolution: {integrity: sha512-JPbdCEQLj1w5GilpiHAx3qJvFndqybBysA3qUOnznweH4QbNYUsW/ea8QzSrnh0vNsezMMw5bcVool8lM0gwzg==}
 
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
@@ -7496,6 +7502,8 @@ snapshots:
   stable-hash@0.0.4: {}
 
   statuses@2.0.1: {}
+
+  std-env@3.7.0: {}
 
   string-argv@0.3.2: {}
 
