@@ -1,0 +1,54 @@
+{
+  "name": "telegram-open-more",
+  "productName": "telegram-open-more",
+  "version": "0.0.0",
+  "description": "My Electron application description",
+  "author": {
+    "name": "zhaogongchengsi",
+    "email": "zzh1586169624@163.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "main": ".vite/build/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint .",
+    "release": "bumpp && pnpm package"
+  },
+  "dependencies": {
+    "@primevue/themes": "^4.0.4",
+    "@vueuse/core": "^11.0.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^10.0.0",
+    "primevue": "^4.0.4",
+    "vue": "^3.4.38"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.26.0",
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron-forge/plugin-vite": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "@primevue/auto-import-resolver": "^4.0.4",
+    "@unocss/eslint-config": "^0.62.2",
+    "@unocss/eslint-plugin": "^0.62.2",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "bumpp": "^9.5.1",
+    "electron": "^31.4.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-format": "^0.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "unplugin-auto-import": "^0.18.2",
+    "unplugin-vue-components": "^0.27.4",
+    "vite": "^5.0.12"
+  }
+}
