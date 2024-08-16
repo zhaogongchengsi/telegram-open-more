@@ -1,6 +1,7 @@
 {
   "name": "telegram-open-more",
   "productName": "telegram-open-more",
+  "type": "module",
   "version": "0.0.0",
   "description": "My Electron application description",
   "author": {
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@primevue/themes": "^4.0.4",
+    "@unocss/reset": "^0.62.2",
     "@vueuse/core": "^11.0.0",
     "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^10.0.0",
@@ -39,6 +41,7 @@
     "@electron-forge/plugin-vite": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "@primevue/auto-import-resolver": "^4.0.4",
+    "@types/electron-squirrel-startup": "^1.0.2",
     "@unocss/eslint-config": "^0.62.2",
     "@unocss/eslint-plugin": "^0.62.2",
     "@vitejs/plugin-vue": "^5.1.2",
@@ -48,6 +51,7 @@
     "eslint-plugin-format": "^0.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
+    "unocss": "^0.62.2",
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.0.12"
