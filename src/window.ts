@@ -17,6 +17,7 @@ export class MainWindow {
       height: option.height,
       webPreferences: {
         preload: join(_dirname, 'preload.js'),
+        partition: 'persist:main',
       },
     })
     // and load the index.html of the app.
