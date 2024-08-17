@@ -16,12 +16,7 @@ export class TelegramWebview {
     this.window = window
   }
 
-  private createId(id: string) {
-    return `${id}`
-  }
-
   createWindow(id: string, options: TelegramWebviewOptions) {
-    const _id = this.createId(id)
     const webview = new Webview({
       src: this.src,
       x: options.x,
@@ -29,9 +24,9 @@ export class TelegramWebview {
       width: options.width,
       height: options.height,
       //   preload: undefined,
-      partition: _id,
+      partition: id,
     })
-    this.webviewCatch.set(_id, webview)
+    this.webviewCatch.set(id, webview)
     webview.mount(this.window)
     webview.show({
       x: options.x,
@@ -39,18 +34,16 @@ export class TelegramWebview {
       width: options.width,
       height: options.height,
     })
+    webview.onUnmount(() => {
+      this.webviewCatch.delete(id)
+    })
   }
 
   closeWindow(id: string) {
-    const _id = this.createId(id)
-    const webview = this.webviewCatch.get(_id)
+    const webview = this.webviewCatch.get(id)
     if (webview) {
       webview.unmount()
-      this.webviewCatch.delete(_id)
+      this.webviewCatch.delete(id)
     }
-  }
-
-  listen() {
-
   }
 }

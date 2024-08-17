@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Webview } from './util'
+import { Webview } from './webview'
 
 const props = defineProps<{
   partition: string
@@ -27,6 +27,12 @@ onMounted(() => {
   webviewInstance.value = new Webview(props.partition)
   webviewInstance.value.createWindow(id, size.value)
   webviewInstance.value.resizeWindow(props.partition, size.value)
+})
+
+onUnmounted(() => {
+  if (!webviewInstance.value)
+    return
+  webviewInstance.value.closeWindow(props.partition)
 })
 
 function resize() {

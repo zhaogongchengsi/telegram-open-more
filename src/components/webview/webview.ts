@@ -1,3 +1,4 @@
+import { webview } from '~/enums/webview'
 import { telegram } from '~/enums/windows'
 
 const ipc = window.modules.ipc
@@ -13,6 +14,10 @@ export class Webview {
   }
 
   resizeWindow(id: string, { x, y, width, height }: { x: number, y: number, width: number, height: number }) {
-    ipc.send(`webview:resize:${id}`, { x, y, width, height })
+    ipc.send(`${webview.resize}:${id}`, { x, y, width, height })
+  }
+
+  closeWindow(id: string) {
+    ipc.send(`${webview.unmount}:${id}`, id)
   }
 }

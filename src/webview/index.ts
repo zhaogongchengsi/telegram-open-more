@@ -1,6 +1,7 @@
 import EventEmitter from 'node:events'
 import type { BrowserWindow } from 'electron'
 import { WebContentsView, ipcMain } from 'electron'
+import { webview } from '~/enums/webview'
 
 export interface WebviewOptions {
   src: string
@@ -22,6 +23,7 @@ export class Webview extends EventEmitter {
   y: number
   private _width: number
   private _height: number
+  private _isMounted = false
   preload?: string
   partition?: string
 
@@ -40,8 +42,13 @@ export class Webview extends EventEmitter {
         partition: options.partition,
       },
     })
-    ipcMain.on(`webview:resize:${options.partition}`, (_, location: Location) => {
+    ipcMain.on(`${webview.resize}:${options.partition}`, (_, location: Location) => {
       this.onWebviewResize(location)
+    })
+    ipcMain.on(`${webview.unmount}:${options.partition}`, (_, id: string) => {
+      if (id === options.partition) {
+        this.unmount()
+      }
     })
   }
 
@@ -86,14 +93,31 @@ export class Webview extends EventEmitter {
     })
   }
 
+  onMainWebviewResize() {
+    const [width, height] = this.window.getContentSize()
+    this.view.setBounds({ x: this.x, y: this.y, width, height })
+  }
+
   mount(window: BrowserWindow) {
     this.window = window
     this.window.contentView.addChildView(this.view)
-    window.webContents.send('webview:mount', this.partition)
-    this.emit('webview:mount', this.partition)
+    window.webContents.send(webview.mount, this.partition)
+    this.emit(webview.mount, this.partition)
+    this._isMounted = true
+    window.on('resize', this.onMainWebviewResize.bind(this))
+  }
+
+  onUnmount(handle: (id: string) => void) {
+    this.on(webview.unmount, handle)
   }
 
   unmount() {
+    if (!this._isMounted) {
+      return
+    }
     this?.window?.contentView?.removeChildView(this.view)
+    this?.window?.webContents?.send(webview.unmount, this.partition)
+    this.emit(webview.unmount, this.partition)
+    this?.window?.removeListener('resize', this.onMainWebviewResize.bind(this))
   }
 }
