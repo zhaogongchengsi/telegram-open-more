@@ -16,10 +16,14 @@ const emit = defineEmits(['close', 'select'])
 function onCloseClick() {
   emit('close')
 }
+
+function onSelected() {
+  emit('select')
+}
 </script>
 
 <template>
-  <TopbarWrapper :active @select="emit('select')">
+  <TopbarWrapper :active @select="onSelected">
     <template #prefix>
       <slot name="prefix" />
     </template>

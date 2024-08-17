@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { Icon } from '@iconify/vue'
+import Setting from './setting.vue'
 import TopbarContainer from '~/components/topbar/topbar-container.vue'
 import TopbarItem from '~/components/topbar/topbar-item.vue'
 import { useTabbar } from '~/composables/tabbar'
@@ -12,7 +13,7 @@ const platform = ref(window.platform)
 const headerStyle = computed(() => {
   return {
     paddingLeft: platform.value.isMacOS ? `${header_left_width}px` : '0',
-    paddingRight: platform.value.isWindows ? `${header_right_width}px` : '20px',
+    paddingRight: platform.value.isWindows ? `${header_right_width}px` : '5px',
   }
 })
 
@@ -52,5 +53,6 @@ function onSelected(id: number | string) {
         </button>
       </template>
     </TopbarContainer>
+    <Setting />
   </div>
 </template>

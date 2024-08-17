@@ -9,6 +9,18 @@
 	.topbar-contianer_inner_box {
 		display: flex;
 		gap: 0.5rem;
+		position: relative;
+		&:before {
+			position: absolute;
+			content: '';
+			width: var(--topbar-active-line-width);
+			height: 1px;
+			background-color: #333;
+			bottom: 0;
+			left: 0;
+			transform: translateX(calc(var(--topbar-active-line-x) - 1.25rem));
+			transition: transform 0.2s, width 0.1s;
+		}
 	}
 }
 
@@ -30,5 +42,5 @@
 	border-radius: 50%;
 }
 .topbar-wrapper-item-active {
-	border-bottom: 1px solid #333;
+	/* border-bottom: 1px solid #333; */
 }
