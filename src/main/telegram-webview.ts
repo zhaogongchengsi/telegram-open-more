@@ -1,5 +1,6 @@
 import type { BrowserWindow } from 'electron'
-import { ViewLocation, Webview } from '~/webview'
+import type { ViewLocation } from '~/webview'
+import { Webview } from '~/webview'
 
 export interface TelegramWebviewOptions {
   width: number
@@ -69,10 +70,10 @@ export class TelegramWebview {
     if (webview) {
       if (webview.isShow()) {
         webview.hide()
-      } else {
+      }
+      else {
         webview.show()
       }
     }
   }
-
 }

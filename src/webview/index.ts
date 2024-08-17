@@ -86,6 +86,7 @@ export class Webview extends EventEmitter {
       return
     }
     this._show = true
+    this.view.setVisible(true)
     const _location = Object.assign({ x: this.x, y: this.y, width: this.width, height: this.height }, location)
     this.load(_location)
   }
@@ -93,7 +94,8 @@ export class Webview extends EventEmitter {
   // 消失但不销毁
   hide() {
     this._show = false
-    this.view.setBounds({ x: 0, y: 0, width: 0, height: 0 })
+    // this.view.setBounds({ x: 0, y: 0, width: 0, height: 0 })
+    this.view.setVisible(false)
   }
 
   openDevTools() {
