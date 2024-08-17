@@ -8,16 +8,17 @@ export default defineConfig((env) => {
   const { forgeConfigSelf } = forgeEnv
   const config: UserConfig = {
     build: {
+      target: 'esnext',
       rollupOptions: {
         external,
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
         input: forgeConfigSelf.entry!,
         output: {
-          format: 'es',
+          format: 'cjs',
           // It should not be split chunks.
           inlineDynamicImports: true,
-          entryFileNames: '[name].js',
-          chunkFileNames: '[name].js',
+          entryFileNames: '[name].cjs',
+          chunkFileNames: '[name].cjs',
           assetFileNames: '[name].[ext]',
         },
       },

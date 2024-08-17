@@ -3,3 +3,8 @@
   width: 100vw;
   height: 100vh;
 }
+
+:root {
+  --app-header-height: 35px;
+  --app-box-height: calc(100vh - var(--app-header-height));
+}

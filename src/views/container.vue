@@ -8,15 +8,16 @@ import TopbarItem from '~/components/topbar/topbar-item.vue'
 <template>
   <Container>
     <template #header>
-      <TopbarContainer>
-        <TopbarItem v-for="(_, i) of Array.from({ length: 4 })" :key="i">
-          {{ i }}index
-        </TopbarItem>
-      </TopbarContainer>
+      <div class="w-full">
+        <TopbarContainer>
+          <TopbarItem v-for="(_, i) of Array.from({ length: 4 })" :key="i">
+            {{ i }}index
+          </TopbarItem>
+        </TopbarContainer>
+      </div>
     </template>
-    <div>
-      <h1>hello world</h1>
-      <Button>hello</Button>
-    </div>
+    <section class="size-full bg-red">
+      <slot />
+    </section>
   </Container>
 </template>

@@ -1,15 +1,10 @@
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import type { ConfigEnv, UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
-import { pluginExposeRenderer } from './vite.base.config'
-
-const _dirname = typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
+import { alias, pluginExposeRenderer } from './vite.base.config'
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -22,10 +17,8 @@ export default defineConfig((env) => {
     mode,
     base: './',
     resolve: {
-      alias: {
-        '~/': `${resolve(_dirname, 'src')}/`,
-      },
       preserveSymlinks: true,
+      alias,
     },
     build: {
       outDir: `.vite/renderer/${name}`,

@@ -1,6 +1,9 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
+import type { TelegramWebviewOptions } from './telegram-webview'
+import { TelegramWebview } from './telegram-webview'
+import { telegram } from '~/enums/windows'
 
 export interface MainWindowOptions {
   width: number
@@ -11,13 +14,16 @@ const _dirname = typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLT
 
 export class MainWindow {
   browserWindow: BrowserWindow
+  telegramWindow: TelegramWebview
   constructor(option: MainWindowOptions) {
     const mainWindow = new BrowserWindow({
       width: option.width,
       height: option.height,
       webPreferences: {
-        preload: join(_dirname, 'preload.js'),
+        preload: join(_dirname, 'preload.cjs'),
         partition: 'persist:main',
+        nodeIntegration: true,
+        // contextIsolation: false,
       },
     })
     // and load the index.html of the app.
@@ -29,6 +35,20 @@ export class MainWindow {
     }
 
     this.browserWindow = mainWindow
+
+    this.telegramWindow = new TelegramWebview(mainWindow)
+
+    this.init()
+  }
+
+  private init() {
+    const telegramWindow = this.telegramWindow
+    ipcMain.on(telegram.create, (_, id: string, options: TelegramWebviewOptions) => {
+      telegramWindow.createWindow(id, options)
+    })
+    ipcMain.on(telegram.close, (_, id: string) => {
+      telegramWindow.closeWindow(id)
+    })
   }
 
   openDevTools() {

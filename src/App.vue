@@ -1,13 +1,14 @@
 <script setup lang='ts'>
-import Button from 'primevue/button'
+import webview from './components/webview/index.vue'
+import { createSessionId } from './utils/random'
 import Container from './views/container.vue'
+
+// const id = createSessionId()
+// console.log(id)
 </script>
 
 <template>
   <Container>
-    <div>
-      hello world
-      <Button>hello</Button>
-    </div>
+    <webview partition="asodhasdhiaucfiac" />
   </Container>
 </template>
