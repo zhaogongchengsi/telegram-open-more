@@ -5,5 +5,10 @@ declare global {
     modules: {
       ipc: Ipc
     }
+    platform: {
+      isMacOS: boolean
+      isWindows: boolean
+      isLinux: boolean
+    }
   }
 }

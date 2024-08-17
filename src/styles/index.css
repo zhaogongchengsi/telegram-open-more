@@ -8,3 +8,11 @@
   --app-header-height: 35px;
   --app-box-height: calc(100vh - var(--app-header-height));
 }
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}

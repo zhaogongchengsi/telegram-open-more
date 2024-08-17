@@ -23,7 +23,10 @@
     "@primevue/themes": "^4.0.4",
     "@unocss/reset": "^0.62.2",
     "@vueuse/core": "^11.0.0",
+    "dexie": "^4.0.8",
     "electron-squirrel-startup": "^1.0.1",
+    "pinia": "^2.2.2",
+    "primeicons": "^7.0.0",
     "primevue": "^4.0.4",
     "std-env": "^3.7.0",
     "vue": "^3.4.38"

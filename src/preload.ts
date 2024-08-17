@@ -1,4 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { isLinux, isMacOS, isWindows } from 'std-env'
+
+contextBridge.exposeInMainWorld('platform', {
+  isMacOS,
+  isWindows,
+  isLinux,
+})
 
 contextBridge.exposeInMainWorld('modules', {
   ipc: {

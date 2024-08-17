@@ -26,7 +26,7 @@ export default defineConfig((env) => {
     plugins: [
       pluginExposeRenderer(name),
       AutoImport({
-        imports: ['vue', '@vueuse/core'],
+        imports: ['vue', '@vueuse/core', 'pinia'],
         dts: 'src/auto-imports.d.ts',
         dirs: ['src/composables', 'src/utils'],
         vueTemplate: true,

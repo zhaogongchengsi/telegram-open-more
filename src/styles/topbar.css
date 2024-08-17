@@ -4,6 +4,8 @@
 	width: min-content;
 	display: flex;
 	font-size: 0.8rem;
+	gap: 0.3rem;
+	align-items: center;
 	.topbar-contianer_inner_box {
 		display: flex;
 		gap: 0.5rem;

@@ -9,6 +9,7 @@ import Container from './views/container.vue'
 
 <template>
   <Container>
-    <webview partition="asodhasdhiaucfiac" />
+    123
+    <!-- <webview partition="asodhasdhiaucfiac" /> -->
   </Container>
 </template>

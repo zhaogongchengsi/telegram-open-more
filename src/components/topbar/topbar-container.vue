@@ -4,7 +4,6 @@ const props = withDefaults(defineProps<{
 }>(), {
   height: '35px',
 })
-
 const topbarStyle = computed(() => {
   return {
     height: props.height,
@@ -13,7 +12,7 @@ const topbarStyle = computed(() => {
 </script>
 
 <template>
-  <div class="topbar-contianer">
+  <div class="topbar-contianer h-full no-drag select-none">
     <div v-if="$slots.prefix">
       <slot name="prefix" />
     </div>

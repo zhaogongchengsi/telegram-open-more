@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { BrowserWindow, ipcMain } from 'electron'
+import { isMacOS } from 'std-env'
 import type { TelegramWebviewOptions } from './telegram-webview'
 import { TelegramWebview } from './telegram-webview'
 import { telegram } from '~/enums/windows'
@@ -19,6 +20,8 @@ export class MainWindow {
     const mainWindow = new BrowserWindow({
       width: option.width,
       height: option.height,
+      titleBarStyle: isMacOS ? 'hiddenInset' : 'default',
+      frame: isMacOS ? true : (!!import.meta.env.DEV),
       webPreferences: {
         preload: join(_dirname, 'preload.cjs'),
         partition: 'persist:main',
