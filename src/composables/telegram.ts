@@ -10,6 +10,11 @@ export const useTelegram = defineStore('telegram', () => {
     return session
   }
 
+  const removeSession = async (id: number) => {
+    await telegramDatabase.telegram.delete(id)
+    data.value = data.value.filter(item => item.id !== id)
+  }
+
   const getSessionById = (id: number) => {
     return data.value.find(item => item.id === id)
   }
@@ -25,5 +30,6 @@ export const useTelegram = defineStore('telegram', () => {
     createSession,
     getSessionById,
     getSessions,
+    removeSession,
   }
 })

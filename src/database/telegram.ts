@@ -39,6 +39,10 @@ class TelegramDatabase extends Dexie {
     return { id, partition, login: false, nickname: 'telegram' }
   }
 
+  async removeSession(id: number) {
+    return await this.telegram.delete(id)
+  }
+
   async getSessions() {
     return await this.telegram.toArray() as TelegramData[]
   }

@@ -29,6 +29,7 @@ async function onAddClick() {
 
 function onCloseClick(id: number | string) {
   tabbar.removeTab(id)
+  telegram.removeSession(id as number)
 }
 
 function onSelected(id: number | string) {
