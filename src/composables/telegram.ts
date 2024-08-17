@@ -14,9 +14,16 @@ export const useTelegram = defineStore('telegram', () => {
     return data.value.find(item => item.id === id)
   }
 
+  const getSessions = async () => {
+    const sessions = await telegramDatabase.getSessions()
+    data.value = sessions
+    return sessions
+  }
+
   return {
     data,
     createSession,
     getSessionById,
+    getSessions,
   }
 })

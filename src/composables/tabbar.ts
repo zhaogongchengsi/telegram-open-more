@@ -15,6 +15,8 @@ export const useTabbar = defineStore('tabbar', () => {
   }
 
   const addTab = (item: TabbarItem) => {
+    if (data.value.some(tab => tab.id === item.id))
+      return
     data.value.push(item)
   }
 

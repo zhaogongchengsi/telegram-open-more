@@ -38,6 +38,10 @@ class TelegramDatabase extends Dexie {
     })
     return { id, partition, login: false, nickname: 'telegram' }
   }
+
+  async getSessions() {
+    return await this.telegram.toArray() as TelegramData[]
+  }
 }
 
 export const telegramDatabase = new TelegramDatabase()

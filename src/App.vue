@@ -12,6 +12,19 @@ const partition = computed(() => {
   const session = telegram.getSessionById(active)
   return session ? session.partition : null
 })
+
+onMounted(async () => {
+  const sessions = await telegram.getSessions()
+  for (const session of sessions) {
+    tabbar.addTab({
+      id: session.id,
+      title: session.nickname,
+    })
+  }
+  if (tabbar.active === null && sessions.length > 0) {
+    tabbar.setActive(sessions[0].id)
+  }
+})
 </script>
 
 <template>

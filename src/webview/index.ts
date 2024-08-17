@@ -43,6 +43,7 @@ export class Webview extends EventEmitter {
         partition: options.partition,
       },
     })
+    this.view.webContents.loadURL(options.src)
     ipcMain.on(`${webview.resize}:${options.partition}`, (_, location: ViewLocation) => {
       this.onWebviewResize(location)
     })
@@ -69,14 +70,6 @@ export class Webview extends EventEmitter {
     return this._height
   }
 
-  private load({ x, y, width, height }: ViewLocation) {
-    if (!this.src) {
-      throw new Error('src is required')
-    }
-    this.view.setBounds({ x, y, width, height })
-    this.view.webContents.loadURL(this.src)
-  }
-
   isShow() {
     return this._show
   }
@@ -88,13 +81,13 @@ export class Webview extends EventEmitter {
     this._show = true
     this.view.setVisible(true)
     const _location = Object.assign({ x: this.x, y: this.y, width: this.width, height: this.height }, location)
-    this.load(_location)
+    this.onWebviewResize(_location)
   }
 
   // 消失但不销毁
   hide() {
     this._show = false
-    // this.view.setBounds({ x: 0, y: 0, width: 0, height: 0 })
+    // this.view.setBounds({ x: 0, y: 0, width: 10, height: 10 })
     this.view.setVisible(false)
   }
 
