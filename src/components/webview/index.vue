@@ -40,6 +40,11 @@ watch([width, height, x, y], () => {
     return
   resize()
 })
+
+defineExpose({
+  partition: props.partition,
+  webview: webviewInstance,
+})
 </script>
 
 <template>
