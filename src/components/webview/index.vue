@@ -30,11 +30,13 @@ watch(() => props.partition, (newId, oldId) => {
   if (!webview.value)
     return
 
-  if (!webviewInstance.value)
+  if (!webviewInstance.value) {
     createWin(newId)
-  else
+  }
+  else {
     webviewInstance.value.hideWindow(oldId)
-  createWin(newId)
+    createWin(newId)
+  }
 })
 
 onMounted(() => {

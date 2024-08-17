@@ -87,7 +87,6 @@ export class Webview extends EventEmitter {
   // 消失但不销毁
   hide() {
     this._show = false
-    // this.view.setBounds({ x: 0, y: 0, width: 10, height: 10 })
     this.view.setVisible(false)
   }
 
