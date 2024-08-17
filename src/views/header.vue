@@ -2,27 +2,46 @@
 import { Icon } from '@iconify/vue'
 import TopbarContainer from '~/components/topbar/topbar-container.vue'
 import TopbarItem from '~/components/topbar/topbar-item.vue'
+import { useTabbar } from '~/composables/tabbar'
+import { header_left_width, header_right_width } from '~/constant'
+
+const tabbar = useTabbar()
 
 const platform = ref(window.platform)
 const headerStyle = computed(() => {
   return {
-    paddingLeft: platform.value.isMacOS ? '100px' : '0',
-    paddingRight: platform.value.isWindows ? '100px' : '20px',
+    paddingLeft: platform.value.isMacOS ? `${header_left_width}px` : '0',
+    paddingRight: platform.value.isWindows ? `${header_right_width}px` : '20px',
   }
 })
+let id = 0
+function onAddClick() {
+  tabbar.addTab({
+    id: id++,
+    title: 'New Tab',
+  })
+}
+
+function onCloseClick(id: number | string) {
+  tabbar.removeTab(id)
+}
+
+function onSelected(id: number | string) {
+  tabbar.setActive(id)
+}
 </script>
 
 <template>
   <div class="drag h-full w-full flex items-center" :style="headerStyle">
     <TopbarContainer>
-      <TopbarItem v-for="(_, i) of Array.from({ length: 3 })" :key="i">
+      <TopbarItem v-for="(item) of tabbar.data" :key="item.id" :active="tabbar.active === item.id" @close="onCloseClick(item.id)" @select="onSelected(item.id)">
         <template #prefix>
-          {{ i }}
+          {{ item.id }}
         </template>
-        telegram
+        <span>{{ item.title }}</span>
       </TopbarItem>
       <template #suffix>
-        <button class="cursor-pointer rounded-full p-2">
+        <button class="cursor-pointer rounded-full p-2" @click="onAddClick">
           <Icon icon="hugeicons:plus-sign" />
         </button>
       </template>

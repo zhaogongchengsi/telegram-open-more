@@ -29,3 +29,6 @@
 	padding: 0.2rem;
 	border-radius: 50%;
 }
+.topbar-wrapper-item-active {
+	border-bottom: 1px solid #333;
+}
