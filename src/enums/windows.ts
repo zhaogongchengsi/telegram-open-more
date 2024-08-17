@@ -3,4 +3,5 @@ export enum telegram {
   close = 'telegram:close',
   hide = 'hide',
   show = 'show',
+  resize = 'resize',
 }

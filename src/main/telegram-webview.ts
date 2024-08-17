@@ -1,5 +1,6 @@
-import type { BrowserWindow } from 'electron'
-import type { ViewLocation } from '~/webview'
+import { type BrowserWindow, ipcMain } from 'electron'
+import { telegram } from '~/enums/windows'
+import type { UpdateLocation, ViewLocation } from '~/webview'
 import { Webview } from '~/webview'
 
 export interface TelegramWebviewOptions {
@@ -12,9 +13,11 @@ export interface TelegramWebviewOptions {
 export class TelegramWebview {
   private readonly src = 'https://web.telegram.org/a'
   private webviewCatch = new Map<string, Webview>()
+  private showWebview: Webview | null = null
   private window: BrowserWindow
   constructor(window: BrowserWindow) {
     this.window = window
+    this.init()
   }
 
   createWindow(id: string, options: TelegramWebviewOptions) {
@@ -43,6 +46,27 @@ export class TelegramWebview {
     })
   }
 
+  private init() {
+    ipcMain.on(telegram.create, (_, id: string, options: TelegramWebviewOptions) => {
+      this.createWindow(id, options)
+    })
+    ipcMain.on(telegram.close, (_, id: string) => {
+      this.closeWindow(id)
+    })
+    ipcMain.on(telegram.show, (_, id: string, location: UpdateLocation) => {
+      this.showWindow(id, location)
+    })
+    ipcMain.on(telegram.hide, (_, id: string) => {
+      this.hideWindow(id)
+    })
+    ipcMain.on(telegram.resize, (_, location: UpdateLocation) => {
+      this.showWebview?.setBounds(location)
+      this.webviewCatch.forEach((webview) => {
+        webview.setBounds(location)
+      })
+    })
+  }
+
   closeWindow(id: string) {
     const webview = this.webviewCatch.get(id)
     if (webview) {
@@ -51,9 +75,10 @@ export class TelegramWebview {
     }
   }
 
-  showWindow(id: string, location?: ViewLocation) {
+  showWindow(id: string, location?: UpdateLocation) {
     const webview = this.webviewCatch.get(id)
     if (webview) {
+      this.showWebview = webview
       webview.show(location)
     }
   }
