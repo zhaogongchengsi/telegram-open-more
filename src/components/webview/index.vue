@@ -9,7 +9,7 @@ const webview = ref<HTMLElement | null>(null)
 const webviewInstance = ref<Webview | null>(null)
 const { width, height, x, y } = useElementBounding(webview)
 
-const size = computed(() => {
+const location = computed(() => {
   return {
     width: width.value,
     height: height.value,
@@ -18,27 +18,41 @@ const size = computed(() => {
   }
 })
 
+function createWin(id: string = props.partition) {
+  const view = new Webview(id)
+  webviewInstance.value = view
+  webviewInstance.value = new Webview(id)
+  webviewInstance.value.createWindow(id, location.value)
+  webviewInstance.value.showWindow(id, location.value)
+}
+
+watch(() => props.partition, (newId, oldId) => {
+  if (!webview.value)
+    return
+
+  if (!webviewInstance.value)
+    createWin(newId)
+  else
+    webviewInstance.value.hideWindow(oldId)
+  createWin(newId)
+})
+
 onMounted(() => {
   if (!webview.value)
     return
-  const view = new Webview(props.partition)
-  const id = props.partition
-  webviewInstance.value = view
-  webviewInstance.value = new Webview(props.partition)
-  webviewInstance.value.createWindow(id, size.value)
-  webviewInstance.value.resizeWindow(props.partition, size.value)
+  createWin()
 })
 
 onUnmounted(() => {
   if (!webviewInstance.value)
     return
-  webviewInstance.value.closeWindow(props.partition)
+  webviewInstance.value.hideWindow(props.partition)
 })
 
 function resize() {
   if (!webview.value)
     return
-  webviewInstance.value.resizeWindow(props.partition, size.value)
+  webviewInstance.value.resizeWindow(props.partition, location.value)
 }
 
 watch([width, height, x, y], () => {
@@ -58,7 +72,7 @@ defineExpose({
 </template>
 
 <style>
-.webview {
+  .webview {
   width: 100%;
   height: 100%;
 }

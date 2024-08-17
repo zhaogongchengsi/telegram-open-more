@@ -6,6 +6,7 @@ import { useTabbar } from '~/composables/tabbar'
 import { header_left_width, header_right_width } from '~/constant'
 
 const tabbar = useTabbar()
+const telegram = useTelegram()
 
 const platform = ref(window.platform)
 const headerStyle = computed(() => {
@@ -14,12 +15,16 @@ const headerStyle = computed(() => {
     paddingRight: platform.value.isWindows ? `${header_right_width}px` : '20px',
   }
 })
-let id = 0
-function onAddClick() {
+
+async function onAddClick() {
+  const session = await telegram.createSession()
   tabbar.addTab({
-    id: id++,
-    title: 'New Tab',
+    id: session.id,
+    title: session.nickname,
   })
+  if (tabbar.active === null) {
+    tabbar.setActive(session.id)
+  }
 }
 
 function onCloseClick(id: number | string) {

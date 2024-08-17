@@ -9,7 +9,3 @@ export function generateUniqueString(length: number): string {
 
   return result
 }
-
-export function createSessionId() {
-  return generateUniqueString(20)
-}

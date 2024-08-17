@@ -13,7 +13,7 @@ export interface WebviewOptions {
   partition?: string
 }
 
-export type Location = Pick<WebviewOptions, 'x' | 'y' | 'width' | 'height'>
+export type ViewLocation = Pick<WebviewOptions, 'x' | 'y' | 'width' | 'height'>
 
 export class Webview extends EventEmitter {
   view: WebContentsView
@@ -24,6 +24,7 @@ export class Webview extends EventEmitter {
   private _width: number
   private _height: number
   private _isMounted = false
+  _show: boolean = false
   preload?: string
   partition?: string
 
@@ -42,7 +43,7 @@ export class Webview extends EventEmitter {
         partition: options.partition,
       },
     })
-    ipcMain.on(`${webview.resize}:${options.partition}`, (_, location: Location) => {
+    ipcMain.on(`${webview.resize}:${options.partition}`, (_, location: ViewLocation) => {
       this.onWebviewResize(location)
     })
     ipcMain.on(`${webview.unmount}:${options.partition}`, (_, id: string) => {
@@ -68,7 +69,7 @@ export class Webview extends EventEmitter {
     return this._height
   }
 
-  private load({ x, y, width, height }: Location) {
+  private load({ x, y, width, height }: ViewLocation) {
     if (!this.src) {
       throw new Error('src is required')
     }
@@ -76,15 +77,30 @@ export class Webview extends EventEmitter {
     this.view.webContents.loadURL(this.src)
   }
 
-  show(location: Location) {
-    this.load(location)
+  isShow() {
+    return this._show
+  }
+
+  show(location?: ViewLocation) {
+    if (!this._isMounted) {
+      return
+    }
+    this._show = true
+    const _location = Object.assign({ x: this.x, y: this.y, width: this.width, height: this.height }, location)
+    this.load(_location)
+  }
+
+  // 消失但不销毁
+  hide() {
+    this._show = false
+    this.view.setBounds({ x: 0, y: 0, width: 0, height: 0 })
   }
 
   openDevTools() {
     this.view.webContents.openDevTools()
   }
 
-  onWebviewResize(location: Location) {
+  onWebviewResize(location: ViewLocation) {
     this.view.setBounds({
       x: location.x,
       y: location.y,

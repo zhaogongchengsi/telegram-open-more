@@ -1,5 +1,5 @@
 import type { BrowserWindow } from 'electron'
-import { Webview } from '~/webview'
+import { ViewLocation, Webview } from '~/webview'
 
 export interface TelegramWebviewOptions {
   width: number
@@ -17,6 +17,9 @@ export class TelegramWebview {
   }
 
   createWindow(id: string, options: TelegramWebviewOptions) {
+    if (this.webviewCatch.has(id)) {
+      return
+    }
     const webview = new Webview({
       src: this.src,
       x: options.x,
@@ -46,4 +49,30 @@ export class TelegramWebview {
       this.webviewCatch.delete(id)
     }
   }
+
+  showWindow(id: string, location?: ViewLocation) {
+    const webview = this.webviewCatch.get(id)
+    if (webview) {
+      webview.show(location)
+    }
+  }
+
+  hideWindow(id: string) {
+    const webview = this.webviewCatch.get(id)
+    if (webview) {
+      webview.hide()
+    }
+  }
+
+  toggleWindow(id: string) {
+    const webview = this.webviewCatch.get(id)
+    if (webview) {
+      if (webview.isShow()) {
+        webview.hide()
+      } else {
+        webview.show()
+      }
+    }
+  }
+
 }

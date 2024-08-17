@@ -5,6 +5,7 @@ import { isMacOS } from 'std-env'
 import type { TelegramWebviewOptions } from './telegram-webview'
 import { TelegramWebview } from './telegram-webview'
 import { telegram } from '~/enums/windows'
+import type { ViewLocation } from '~/webview'
 
 export interface MainWindowOptions {
   width: number
@@ -51,6 +52,12 @@ export class MainWindow {
     })
     ipcMain.on(telegram.close, (_, id: string) => {
       telegramWindow.closeWindow(id)
+    })
+    ipcMain.on(telegram.show, (_, id: string, location: ViewLocation) => {
+      telegramWindow.showWindow(id, location)
+    })
+    ipcMain.on(telegram.hide, (_, id: string) => {
+      telegramWindow.hideWindow(id)
     })
   }
 
