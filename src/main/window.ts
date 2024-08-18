@@ -42,6 +42,54 @@ export class MainWindow {
   openDevTools() {
     this.browserWindow.webContents.openDevTools()
   }
+
+  closeDevTools() {
+    this.browserWindow.webContents.closeDevTools()
+  }
+
+  show() {
+    this.browserWindow.show()
+  }
+
+  hide() {
+    this.browserWindow.hide()
+  }
+
+  close() {
+    this.browserWindow.close()
+  }
+
+  minimize() {
+    this.browserWindow.minimize()
+  }
+
+  maximize() {
+    this.browserWindow.maximize()
+  }
+
+  unmaximize() {
+    this.browserWindow.unmaximize()
+  }
+
+  isMaximized() {
+    return this.browserWindow.isMaximized()
+  }
+
+  isMinimized() {
+    return this.browserWindow.isMinimized()
+  }
+
+  isFocused() {
+    return this.browserWindow.isFocused()
+  }
+
+  isDestroyed() {
+    return this.browserWindow.isDestroyed()
+  }
+
+  setBounds(options: Electron.Rectangle) {
+    this.browserWindow.setBounds(options)
+  }
 }
 
 let mainWindow: MainWindow
