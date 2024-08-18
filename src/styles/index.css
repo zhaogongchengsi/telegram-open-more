@@ -7,6 +7,9 @@
 :root {
   --app-header-height: 35px;
   --app-box-height: calc(100vh - var(--app-header-height));
+
+  --primary-color: #0078d4;
+  --secondary-color: #f3f2f1;
 }
 
 .drag {
