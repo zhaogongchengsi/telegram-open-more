@@ -16,3 +16,10 @@
 .no-drag {
   -webkit-app-region: no-drag;
 }
+
+.dark {
+  & body {
+    background-color: #333;
+    color: #fff;
+  }
+}

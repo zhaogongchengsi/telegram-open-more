@@ -21,3 +21,11 @@ export function isMaximized() {
 export function isMinimized() {
   return ipc.sendSync(windows.isMinimized)
 }
+
+export function dark() {
+  ipc.send(windows.dark)
+}
+
+export function light() {
+  ipc.send(windows.light)
+}

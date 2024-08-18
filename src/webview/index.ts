@@ -82,6 +82,14 @@ export class Webview extends EventEmitter {
     this.setBounds(location)
   }
 
+  dark() {
+
+  }
+
+  light() {
+
+  }
+
   // 消失但不销毁
   hide() {
     this._show = false

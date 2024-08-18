@@ -16,4 +16,6 @@ export enum windows {
   isFocused = 'isFocused',
   isDestroyed = 'isDestroyed',
   setBounds = 'setBounds',
+  dark = 'dark',
+  light = 'light',
 }

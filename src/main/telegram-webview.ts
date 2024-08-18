@@ -78,6 +78,18 @@ export class TelegramWebview {
     }
   }
 
+  dark() {
+    this.webviewCatch.forEach((webview) => {
+      webview.dark()
+    })
+  }
+
+  light() {
+    this.webviewCatch.forEach((webview) => {
+      webview.light()
+    })
+  }
+
   setActiveWindow(id: string, fastId: string) {
     const showView = this.webviewCatch.get(id)
 

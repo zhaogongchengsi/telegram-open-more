@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, ipcMain } from 'electron'
+import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import { isMacOS } from 'std-env'
 import { TelegramWebview } from './telegram-webview'
 import { windows } from '~/enums/windows'
@@ -58,6 +58,14 @@ export class MainWindow {
 
     mainWindow.on('enter-full-screen', () => {
       mainWindow.webContents.send(windows.maximize)
+    })
+
+    ipcMain.on(windows.dark, () => {
+      nativeTheme.themeSource = 'dark'
+    })
+
+    ipcMain.on(windows.light, () => {
+      nativeTheme.themeSource = 'light'
     })
 
     mainWindow.on('leave-full-screen', () => {
