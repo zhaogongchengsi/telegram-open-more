@@ -9,11 +9,10 @@ import { header_left_width, header_right_width } from '~/constant'
 const tabbar = useTabbar()
 const telegram = useTelegram()
 
-const platform = ref(window.platform)
 const headerStyle = computed(() => {
   return {
-    paddingLeft: platform.value.isMacOS ? `${header_left_width}px` : '0',
-    paddingRight: platform.value.isWindows ? `${header_right_width}px` : '5px',
+    paddingLeft: isMac.value ? `${header_left_width}px` : '0',
+    paddingRight: isWindows.value ? `${header_right_width}px` : '5px',
   }
 })
 

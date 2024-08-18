@@ -48,12 +48,15 @@ declare global {
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const ipc: typeof import('./utils/ipc')['ipc']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isLinux: typeof import('./composables/platform')['isLinux']
+  const isMac: typeof import('./composables/platform')['isMac']
   const isMaximized: typeof import('./utils/window')['isMaximized']
   const isMinimized: typeof import('./utils/window')['isMinimized']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isWindows: typeof import('./composables/platform')['isWindows']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -82,6 +85,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const platform: typeof import('./composables/platform')['platform']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
   const reactify: typeof import('@vueuse/core')['reactify']
@@ -361,12 +365,15 @@ declare module 'vue' {
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isLinux: UnwrapRef<typeof import('./composables/platform')['isLinux']>
+    readonly isMac: UnwrapRef<typeof import('./composables/platform')['isMac']>
     readonly isMaximized: UnwrapRef<typeof import('./utils/window')['isMaximized']>
     readonly isMinimized: UnwrapRef<typeof import('./utils/window')['isMinimized']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isWindows: UnwrapRef<typeof import('./composables/platform')['isWindows']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
@@ -395,6 +402,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly platform: UnwrapRef<typeof import('./composables/platform')['platform']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
