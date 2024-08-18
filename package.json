@@ -2,7 +2,7 @@
   "name": "telegram-open-more",
   "productName": "Tom",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Telegram open more",
   "author": {
     "name": "zhaogongchengsi",
@@ -18,7 +18,7 @@
     "package:win": "pnpm build && electron-builder --config",
     "package:mac": "pnpm build && electron-builder --mac --config",
     "lint": "eslint .",
-    "release": "bumpp && pnpm package"
+    "release": "bumpp"
   },
   "dependencies": {
     "@primevue/themes": "^4.0.4",
