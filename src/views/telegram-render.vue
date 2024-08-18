@@ -36,6 +36,14 @@ telegram.createEvent.on((session) => {
   createTelegram(session.partition, location.value)
 })
 
+telegram.startLoadingEvent.on(({ id }) => {
+  tabbar.startSpin(id)
+})
+
+telegram.stopLoadingEvent.on(({ id }) => {
+  tabbar.stopSpin(id)
+})
+
 onMounted(async () => {
   const sessions = await telegram.getSessions()
   for (const session of sessions) {
@@ -43,6 +51,7 @@ onMounted(async () => {
       id: session.id,
       title: session.nickname,
     })
+
     createTelegram(session.partition, location.value)
   }
   if (tabbar.active === null && sessions.length > 0) {

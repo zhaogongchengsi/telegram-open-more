@@ -69,11 +69,13 @@ export class Webview extends EventEmitter<WebviewEvents> {
 
   // 加载完成
   onDidFinishLoad() {
+    this.emit('did-start-loading', this.partition)
     this.emit('did-finish-load', this.partition)
   }
 
   // 加载失败
   onDidFailLoad() {
+    this.emit('did-stop-loading', this.partition)
     this.emit('did-fail-load', this.partition)
   }
 
@@ -146,12 +148,14 @@ export class Webview extends EventEmitter<WebviewEvents> {
   mount(window: BrowserWindow) {
     this.window = window
     this.window.contentView.addChildView(this.view)
+    this.emit('did-start-loading', this.partition)
     window.webContents.send(webview.mount, this.partition)
     this.emit('mount', this.partition)
     this._isMounted = true
   }
 
   onUnmount(handle: (id: string) => void) {
+    this.emit('did-start-loading', this.partition)
     this.on('unmount', handle)
   }
 

@@ -1,4 +1,4 @@
-import logo from '~/assets/telegram@16x16.png'
+import logo from '~/assets/telegram.png'
 
 export type TabbarId = string | number
 
@@ -6,6 +6,7 @@ export interface TabbarItem {
   id: TabbarId
   title: string
   icon?: string
+  spin?: boolean
 }
 
 export const useTabbar = defineStore('tabbar', () => {
@@ -56,11 +57,27 @@ export const useTabbar = defineStore('tabbar', () => {
     return index
   }
 
+  const startSpin = (id: TabbarId) => {
+    const value = data.value.find(item => item.id === id)
+    if (value) {
+      value.spin = true
+    }
+  }
+
+  const stopSpin = (id: TabbarId) => {
+    const value = data.value.find(item => item.id === id)
+    if (value) {
+      value.spin = false
+    }
+  }
+
   return {
     data,
     active,
     setActive,
     addTab,
     removeTab,
+    startSpin,
+    stopSpin,
   }
 })

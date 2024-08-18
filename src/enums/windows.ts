@@ -5,6 +5,8 @@ export enum telegram {
   show = 'show',
   resize = 'resize',
   setActive = 'setActive',
+  startLoading = 'startLoading',
+  stopLoading = 'stopLoading',
 }
 
 export enum windows {

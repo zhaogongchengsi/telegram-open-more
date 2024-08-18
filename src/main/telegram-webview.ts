@@ -34,6 +34,12 @@ export class TelegramWebview {
       partition: id,
     })
     this.webviewCatch.set(id, webview)
+    webview.on('did-start-loading', (id) => {
+      this.window.webContents.send(telegram.startLoading, id)
+    })
+    webview.on('did-stop-loading', (id) => {
+      this.window.webContents.send(telegram.stopLoading, id)
+    })
     webview.mount(this.window)
     webview.show({
       x: options.x,
