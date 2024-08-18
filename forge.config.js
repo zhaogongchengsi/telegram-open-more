@@ -21,7 +21,9 @@ const config = {
       },
     },
   ],
-  rebuildConfig: {},
+  rebuildConfig: {
+    executableName: 'Tom',
+  },
   makers: [
     new MakerSquirrel({}),
     new MakerRpm({}),
