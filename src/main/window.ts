@@ -1,7 +1,8 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
+import { BrowserWindow, ipcMain, nativeImage, nativeTheme } from 'electron'
 import { isMacOS } from 'std-env'
+import logo from '../../resources/telegram@256x256.png?asset'
 import { TelegramWebview } from './telegram-webview'
 import { windows } from '~/enums/windows'
 
@@ -16,11 +17,14 @@ export class MainWindow {
   browserWindow: BrowserWindow
   telegramWindow: TelegramWebview
   constructor(option: MainWindowOptions) {
+    const icon = nativeImage.createFromPath(logo)
+
     const mainWindow = new BrowserWindow({
       width: option.width,
       height: option.height,
       titleBarStyle: isMacOS ? 'hiddenInset' : 'default',
       frame: isMacOS ? true : (!!import.meta.env.DEV),
+      icon,
       webPreferences: {
         preload: join(_dirname, '../preload/preload.mjs'),
         partition: 'persist:main',

@@ -14,7 +14,9 @@
   "scripts": {
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
-    "prebuild": "electron-vite build",
+    "build": "electron-vite build",
+    "package:win": "electron-builder --config",
+    "package:mac": "electron-builder --mac --config",
     "lint": "eslint .",
     "release": "bumpp && pnpm package"
   },
@@ -41,6 +43,7 @@
     "@vitejs/plugin-vue": "^5.1.2",
     "bumpp": "^9.5.1",
     "electron": "^31.4.0",
+    "electron-builder": "^24.13.3",
     "electron-vite": "^2.3.0",
     "eslint": "^9.9.0",
     "eslint-plugin-format": "^0.1.2",

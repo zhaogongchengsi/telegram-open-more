@@ -1,0 +1,35 @@
+appId: https://github.com/zhaogongchengsi/telegram-open-more
+productName: Tom
+directories:
+  buildResources: resources
+files:
+  - node_modules
+  - out
+  - resources
+asarUnpack:
+  - resources/**
+win:
+  executableName: tom
+  icon: ./resources/telegram.ico
+nsis:
+  oneClick: false
+  artifactName: ${name}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: true
+  allowToChangeInstallationDirectory: true
+  installerHeaderIcon: resources/telegram.ico
+  uninstallerIcon: resources/telegram.ico
+  installerIcon: resources/telegram.ico
+  createStartMenuShortcut: true
+  allowElevation: true
+  perMachine: true
+mac:
+  notarize: false
+  icon: resources/telegram.icns
+dmg:
+  artifactName: ${name}.${ext}
+appImage:
+  artifactName: ${name}.${ext}
+npmRebuild: false
+
