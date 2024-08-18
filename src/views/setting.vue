@@ -9,13 +9,13 @@ const screen = useScreen()
     <button class="rounded-full p-1">
       <Icon icon="hugeicons:setting-07" />
     </button>
-    <button class="rounded-full p-1">
+    <button class="rounded-full p-1" @click="screen.minimize">
       <Icon icon="hugeicons:solid-line-01" />
     </button>
-    <button v-if="!screen.isFullScreen" class="rounded-full p-1">
+    <button v-if="!screen.isFullScreen" class="rounded-full p-1" @click="screen.maximize">
       <Icon icon="hugeicons:maximize-screen" />
     </button>
-    <button v-else class="rounded-full p-1">
+    <button v-else class="rounded-full p-1" @click="screen.unmaximize">
       <Icon icon="hugeicons:minimize-screen" />
     </button>
     <button class="rounded-full p-1">

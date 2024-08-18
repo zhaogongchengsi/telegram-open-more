@@ -1,8 +1,9 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 import { isMacOS } from 'std-env'
 import { TelegramWebview } from './telegram-webview'
+import { windows } from '~/enums/windows'
 
 export interface MainWindowOptions {
   width: number
@@ -37,6 +38,37 @@ export class MainWindow {
 
     this.browserWindow = mainWindow
     this.telegramWindow = new TelegramWebview(mainWindow)
+
+    ipcMain.on(windows.minimize, () => {
+      this.minimize()
+    })
+    ipcMain.on(windows.maximize, () => {
+      this.maximize()
+    })
+    ipcMain.on(windows.unmaximize, () => {
+      this.unmaximize()
+    })
+    // 监听窗口放大缩小然后给渲染进程发送消息
+    mainWindow.on('maximize', () => {
+      mainWindow.webContents.send(windows.maximize)
+    })
+    mainWindow.on('unmaximize', () => {
+      mainWindow.webContents.send(windows.unmaximize)
+    })
+
+    mainWindow.on('enter-full-screen', () => {
+      mainWindow.webContents.send(windows.maximize)
+    })
+
+    mainWindow.on('leave-full-screen', () => {
+      mainWindow.webContents.send(windows.unmaximize)
+    })
+    ipcMain.on(windows.isMaximized, (event) => {
+      event.returnValue = mainWindow.isMaximized()
+    })
+    ipcMain.on(windows.isMinimized, (event) => {
+      event.returnValue = mainWindow.isMinimized()
+    })
   }
 
   openDevTools() {
