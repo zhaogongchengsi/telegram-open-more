@@ -1,6 +1,6 @@
 import { type BrowserWindow, ipcMain } from 'electron'
 import { telegram } from '~/enums/windows'
-import type { UpdateLocation, ViewLocation } from '~/webview'
+import type { UpdateLocation } from '~/webview'
 import { Webview } from '~/webview'
 
 export interface TelegramWebviewOptions {

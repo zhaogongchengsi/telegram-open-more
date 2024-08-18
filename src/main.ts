@@ -13,9 +13,9 @@ let mainWindow
 function createWindow() {
   // Create the browser window.
   mainWindow = getMainWindow({ width: 800, height: 600 })
-
-  // Open the DevTools.
-  mainWindow.openDevTools()
+  if (import.meta.env.DEV) {
+    mainWindow.openDevTools()
+  }
 }
 
 app.on('ready', createWindow)
