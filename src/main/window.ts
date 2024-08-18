@@ -22,18 +22,21 @@ export class MainWindow {
       titleBarStyle: isMacOS ? 'hiddenInset' : 'default',
       frame: isMacOS ? true : (!!import.meta.env.DEV),
       webPreferences: {
-        preload: join(_dirname, 'preload.cjs'),
+        preload: join(_dirname, '../preload/preload.mjs'),
         partition: 'persist:main',
         nodeIntegration: true,
         // contextIsolation: false,
       },
     })
-    // and load the index.html of the app.
-    if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-      mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL)
+
+    // eslint-disable-next-line node/prefer-global/process
+    const rendererUrl = process.env.ELECTRON_RENDERER_URL
+    // eslint-disable-next-line node/prefer-global/process
+    if (process.env.IS_DEV && rendererUrl) {
+      mainWindow.loadURL(rendererUrl)
     }
     else {
-      mainWindow.loadFile(join(_dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`))
+      mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
     }
 
     this.browserWindow = mainWindow

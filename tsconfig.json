@@ -10,6 +10,9 @@
       ]
     },
     "resolveJsonModule": true,
+    "types": [
+      "electron-vite/node"
+    ],
     "allowJs": true,
     "noImplicitAny": true,
     "outDir": "dist",
