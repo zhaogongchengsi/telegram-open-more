@@ -4,4 +4,5 @@ export enum telegram {
   hide = 'hide',
   show = 'show',
   resize = 'resize',
+  setActive = 'setActive',
 }

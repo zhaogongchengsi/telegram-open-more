@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-withDefaults(
+const props = withDefaults(
   defineProps<{
     active?: boolean
   }>(),
@@ -15,9 +15,21 @@ const activeWidth = inject<{ setValue: (value: number) => void, getValue: () => 
 const el = ref<HTMLLIElement>(null)
 const { width } = useElementBounding(el)
 
-function onSelected() {
+function updateLineStyle() {
+  if (!el.value)
+    return
   activeLocation.setValue(Math.round(el.value.offsetLeft))
   activeWidth.setValue(width.value)
+}
+
+watch(() => props.active, (isActive) => {
+  if (isActive) {
+    updateLineStyle()
+  }
+})
+
+function onSelected() {
+  updateLineStyle()
   emit('select')
 }
 </script>

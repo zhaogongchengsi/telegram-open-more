@@ -28,6 +28,14 @@ const active = computed(() => {
   return session ? session.partition : null
 })
 
+watch(active, async (newId, oldId) => {
+  setActiveTelegram(newId, oldId)
+})
+
+telegram.createEvent.on((session) => {
+  createTelegram(session.partition, location.value)
+})
+
 onMounted(async () => {
   const sessions = await telegram.getSessions()
   for (const session of sessions) {

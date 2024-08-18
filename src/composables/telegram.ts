@@ -3,10 +3,12 @@ import { telegramDatabase } from '~/database/telegram'
 
 export const useTelegram = defineStore('telegram', () => {
   const data = ref<TelegramData[]>([])
+  const createEvent = useEventBus<TelegramData>('create-telegram')
 
   const createSession = async () => {
     const session = await telegramDatabase.createSession()
     data.value.push(session)
+    createEvent.emit(session)
     return session
   }
 
@@ -31,5 +33,6 @@ export const useTelegram = defineStore('telegram', () => {
     getSessionById,
     getSessions,
     removeSession,
+    createEvent,
   }
 })

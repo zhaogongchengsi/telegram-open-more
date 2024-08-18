@@ -65,6 +65,9 @@ export class TelegramWebview {
         webview.setBounds(location)
       })
     })
+    ipcMain.on(telegram.setActive, (_, id: string, fastShowId: string) => {
+      this.setActiveWindow(id, fastShowId)
+    })
   }
 
   closeWindow(id: string) {
@@ -73,6 +76,30 @@ export class TelegramWebview {
       webview.unmount()
       this.webviewCatch.delete(id)
     }
+  }
+
+  setActiveWindow(id: string, fastId: string) {
+    const showView = this.webviewCatch.get(id)
+
+    if (showView) {
+      showView.show()
+      this.showWebview = showView
+    }
+
+    if (fastId) {
+      const fastView = this.webviewCatch.get(fastId)
+      if (fastView) {
+        fastView.hide()
+      }
+    }
+
+    this.webviewCatch.forEach((webview, _id) => {
+      if ([id, fastId].includes(_id)) {
+        return
+      }
+
+      webview.hide()
+    })
   }
 
   showWindow(id: string, location?: UpdateLocation) {
