@@ -2,7 +2,7 @@
   "name": "telegram-open-more",
   "productName": "Tom",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Telegram open more",
   "author": {
     "name": "zhaogongchengsi",
@@ -15,8 +15,8 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "electron-vite build",
-    "package:win": "pnpm build && electron-builder --config",
-    "package:mac": "pnpm build && electron-builder --mac --config",
+    "package:win": "electron-builder --config",
+    "package:mac": "electron-builder --mac --config",
     "lint": "eslint .",
     "release": "bumpp"
   },
