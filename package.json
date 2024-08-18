@@ -9,7 +9,12 @@
     "email": "zzh1586169624@163.com"
   },
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "telegram",
+    "open",
+    "more",
+    "electron"
+  ],
   "main": "out/main/index.js",
   "scripts": {
     "start": "electron-vite preview",
