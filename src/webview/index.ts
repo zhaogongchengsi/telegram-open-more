@@ -17,7 +17,16 @@ export type ViewLocation = Pick<WebviewOptions, 'x' | 'y' | 'width' | 'height'>
 
 export type UpdateLocation = Partial<ViewLocation>
 
-export class Webview extends EventEmitter {
+export interface WebviewEvents {
+  'did-finish-load': string[]
+  'did-fail-load': string[]
+  'did-start-loading': string[]
+  'did-stop-loading': string[]
+  'mount': string[]
+  'unmount': string[]
+}
+
+export class Webview extends EventEmitter<WebviewEvents> {
   view: WebContentsView
   window: BrowserWindow
   src: string
@@ -51,6 +60,31 @@ export class Webview extends EventEmitter {
         this.unmount()
       }
     })
+
+    this.view.webContents.on('did-finish-load', this.onDidFinishLoad.bind(this))
+    this.view.webContents.on('did-fail-load', this.onDidFailLoad.bind(this))
+    this.view.webContents.on('did-start-loading', this.didStartLoading.bind(this))
+    this.view.webContents.on('did-stop-loading', this.didStopLoading.bind(this))
+  }
+
+  // 加载完成
+  onDidFinishLoad() {
+    this.emit('did-finish-load', this.partition)
+  }
+
+  // 加载失败
+  onDidFailLoad() {
+    this.emit('did-fail-load', this.partition)
+  }
+
+  // 开始旋转
+  didStartLoading() {
+    this.emit('did-start-loading', this.partition)
+  }
+
+  // 停止旋转
+  didStopLoading() {
+    this.emit('did-stop-loading', this.partition)
   }
 
   set width(width: number) {
@@ -113,12 +147,12 @@ export class Webview extends EventEmitter {
     this.window = window
     this.window.contentView.addChildView(this.view)
     window.webContents.send(webview.mount, this.partition)
-    this.emit(webview.mount, this.partition)
+    this.emit('mount', this.partition)
     this._isMounted = true
   }
 
   onUnmount(handle: (id: string) => void) {
-    this.on(webview.unmount, handle)
+    this.on('unmount', handle)
   }
 
   unmount() {
@@ -127,6 +161,6 @@ export class Webview extends EventEmitter {
     }
     this?.window?.contentView?.removeChildView(this.view)
     this?.window?.webContents?.send(webview.unmount, this.partition)
-    this.emit(webview.unmount, this.partition)
+    this.emit('unmount', this.partition)
   }
 }
