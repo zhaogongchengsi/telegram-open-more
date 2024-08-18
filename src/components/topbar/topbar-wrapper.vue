@@ -22,6 +22,12 @@ function updateLineStyle() {
   activeWidth.setValue(width.value)
 }
 
+watchEffect(() => {
+  if (props.active && el.value) {
+    updateLineStyle()
+  }
+})
+
 watch(() => props.active, (isActive) => {
   if (isActive) {
     updateLineStyle()
