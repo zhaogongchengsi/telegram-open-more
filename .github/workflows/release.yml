@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-12, windows-latest]
+        os: [windows-latest]
 
     steps:
       - name: Check out Git repository
@@ -25,16 +25,15 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: build-mac
-        if: matrix.os == 'macos-12'
-        run: npm run build && npm run package:mac
-
       - name: build-win
         if: matrix.os == 'windows-latest'
         run: npm run build && npm run package:win
 
       - name: release
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           draft: true
           files: |
@@ -48,5 +47,3 @@ jobs:
             dist/*.tar.gz
             dist/*.yml
             dist/*.blockmap
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
