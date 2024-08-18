@@ -42,7 +42,7 @@ function onSelected(id: number | string) {
     <TopbarContainer>
       <TopbarItem v-for="(item) of tabbar.data" :key="item.id" :active="tabbar.active === item.id" @close="onCloseClick(item.id)" @select="onSelected(item.id)">
         <template #prefix>
-          {{ item.id }}
+          <img v-if="item.icon" :src="item.icon" alt="icon">
         </template>
         <span>{{ item.title }}</span>
       </TopbarItem>

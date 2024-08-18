@@ -35,8 +35,7 @@ export class MainWindow {
 
     // eslint-disable-next-line node/prefer-global/process
     const rendererUrl = process.env.ELECTRON_RENDERER_URL
-    // eslint-disable-next-line node/prefer-global/process
-    if (process.env.IS_DEV && rendererUrl) {
+    if (import.meta.env.DEV && rendererUrl) {
       mainWindow.loadURL(rendererUrl)
     }
     else {

@@ -1,4 +1,6 @@
 <script setup lang='ts'>
+import logo from '~/assets/telegram@16x16.png'
+
 const tabbar = useTabbar()
 const telegram = useTelegram()
 
@@ -42,6 +44,7 @@ onMounted(async () => {
     tabbar.addTab({
       id: session.id,
       title: session.nickname,
+      icon: logo,
     })
     createTelegram(session.partition, location.value)
   }
