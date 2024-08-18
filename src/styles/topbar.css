@@ -18,7 +18,7 @@
 			background-color: #333;
 			bottom: 0;
 			left: 0;
-			transform: translateX(calc(var(--topbar-active-line-x) - 1.25rem));
+			transform: translateX(var(--topbar-active-line-x));
 			transition: transform 0.2s, width 0.1s;
 		}
 	}

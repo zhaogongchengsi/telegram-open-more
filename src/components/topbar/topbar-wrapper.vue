@@ -12,13 +12,13 @@ const emit = defineEmits(['select'])
 const activeLocation = inject<{ setValue: (value: number) => void, getValue: () => number }>('activeLocation')
 const activeWidth = inject<{ setValue: (value: number) => void, getValue: () => number }>('activeWidth')
 
-const el = ref(null)
-const { left, width } = useElementBounding(el)
+const el = ref<HTMLLIElement>(null)
+const { width } = useElementBounding(el)
 
 function onSelected() {
-  emit('select')
-  activeLocation.setValue(Math.round(left.value - width.value))
+  activeLocation.setValue(Math.round(el.value.offsetLeft))
   activeWidth.setValue(width.value)
+  emit('select')
 }
 </script>
 
