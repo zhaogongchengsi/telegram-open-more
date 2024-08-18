@@ -36,8 +36,8 @@ function onSelected() {
 
 <template>
   <li
-    ref="el" :active class="topbar-wrapper-item cursor-pointer" :class="[{ 'topbar-wrapper-item-active': active }]"
-    @click="onSelected"
+    ref="el" :active class="topbar-wrapper-item shrink-0 cursor-pointer"
+    :class="[{ 'topbar-wrapper-item-active': active }]" @click="onSelected"
   >
     <slot name="prefix" />
     <slot />

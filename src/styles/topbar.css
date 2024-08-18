@@ -1,11 +1,12 @@
 
 
 .topbar-contianer {
-	width: min-content;
+	width: max-content;
 	display: flex;
 	font-size: 0.8rem;
 	gap: 0.3rem;
 	align-items: center;
+	--topbar-active-line-color: #333;
 	.topbar-contianer_inner_box {
 		display: flex;
 		gap: 0.5rem;
@@ -15,12 +16,18 @@
 			content: '';
 			width: var(--topbar-active-line-width);
 			height: 1px;
-			background-color: #333;
+			background-color: var(--topbar-active-line-color);
 			bottom: 0;
 			left: 0;
 			transform: translateX(var(--topbar-active-line-x));
 			transition: transform 0.2s, width 0.1s;
 		}
+	}
+}
+
+.dark {
+	& .topbar-contianer {
+		--topbar-active-line-color: #fff;
 	}
 }
 

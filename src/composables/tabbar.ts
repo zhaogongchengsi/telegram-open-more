@@ -1,3 +1,5 @@
+import logo from '~/assets/telegram@16x16.png'
+
 export type TabbarId = string | number
 
 export interface TabbarItem {
@@ -17,7 +19,8 @@ export const useTabbar = defineStore('tabbar', () => {
   const addTab = (item: TabbarItem) => {
     if (data.value.some(tab => tab.id === item.id))
       return
-    data.value.push(item)
+    const config = Object.assign({ icon: logo }, item)
+    data.value.push(config)
   }
 
   const removeTab = (id: TabbarId) => {
