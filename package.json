@@ -1,9 +1,9 @@
 {
   "name": "telegram-open-more",
-  "productName": "telegram-open-more",
+  "productName": "Tom",
   "type": "module",
   "version": "0.0.0",
-  "description": "My Electron application description",
+  "description": "Telegram open more",
   "author": {
     "name": "zhaogongchengsi",
     "email": "zzh1586169624@163.com"
