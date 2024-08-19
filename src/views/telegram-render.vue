@@ -1,4 +1,6 @@
 <script setup lang='ts'>
+import Hello from './hello.vue'
+
 const tabbar = useTabbar()
 const telegram = useTelegram()
 
@@ -70,11 +72,21 @@ onMounted(async () => {
     tabbar.setActive(sessions[0].id)
   }
 })
+
+async function create() {
+  const session = await telegram.createSession()
+  tabbar.addTab({
+    id: session.id,
+    title: session.nickname,
+  })
+  createTelegram(session.partition, location.value)
+  tabbar.setActive(session.id)
+}
 </script>
 
 <template>
   <div v-if="telegram.data.length === 0" class="size-full flex items-center justify-center">
-    k
+    <Hello @create="create" />
   </div>
   <div v-else ref="webview" class="size-full" :data-active="active" />
 </template>
