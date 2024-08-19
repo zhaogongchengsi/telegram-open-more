@@ -40,9 +40,13 @@ function onSelected(id: number | string) {
 <template>
   <div class="drag h-full w-full flex items-center" :style="headerStyle">
     <TopbarContainer>
-      <TopbarItem v-for="(item) of tabbar.data" :key="item.id" :active="tabbar.active === item.id" @close="onCloseClick(item.id)" @select="onSelected(item.id)">
+      <TopbarItem
+        v-for="(item) of tabbar.data" :key="item.id" :active="tabbar.active === item.id"
+        @close="onCloseClick(item.id)" @select="onSelected(item.id)"
+      >
         <template #prefix>
-          <img v-if="item.icon" :class="{ 'animate-spin': item.spin }" class="size-4" :src="item.icon" alt="icon">
+          <Icon v-if="item.spin" width="15px" height="15px" class="animate-spin" icon="mingcute:loading-fill" />
+          <img v-else-if="item.icon" class="size-4" :src="item.icon" alt="icon">
         </template>
         <span>{{ item.title }}</span>
       </TopbarItem>
