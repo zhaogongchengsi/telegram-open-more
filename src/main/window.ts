@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, ipcMain, nativeImage, nativeTheme } from 'electron'
+import { BrowserWindow, app, ipcMain, nativeImage, nativeTheme } from 'electron'
 import { isMacOS } from 'std-env'
 import logo from '../../resources/telegram@256x256.png?asset'
 import { TelegramWebview } from './telegram-webview'
@@ -82,6 +82,11 @@ export class MainWindow {
     })
     ipcMain.on(windows.isMinimized, (event) => {
       event.returnValue = mainWindow.isMinimized()
+    })
+    // 关闭窗口退出程序
+    ipcMain.on(windows.close, () => {
+      mainWindow.close()
+      app.quit()
     })
   }
 

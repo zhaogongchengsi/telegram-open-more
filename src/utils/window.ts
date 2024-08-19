@@ -29,3 +29,7 @@ export function dark() {
 export function light() {
   ipc.send(windows.light)
 }
+
+export function close() {
+  ipc.send(windows.close)
+}

@@ -13,10 +13,14 @@ watchEffect(() => {
     light()
   }
 })
+
+function onClosed() {
+  close()
+}
 </script>
 
 <template>
-  <div class="no-drag h-full flex items-center px-3">
+  <div class="no-drag h-full flex items-center gap-2 px-3">
     <button class="rounded-full p-1">
       <Icon icon="hugeicons:setting-07" />
     </button>
@@ -33,7 +37,7 @@ watchEffect(() => {
     <button v-else-if="isWindows" class="rounded-full p-1" @click="screen.unmaximize">
       <Icon icon="hugeicons:minimize-screen" />
     </button>
-    <button v-if="isWindows" class="rounded-full p-1">
+    <button v-if="isWindows" class="rounded-full p-1" @click="onClosed">
       <Icon icon="hugeicons:cancel-01" />
     </button>
   </div>

@@ -20,4 +20,5 @@ export enum windows {
   setBounds = 'setBounds',
   dark = 'dark',
   light = 'light',
+  close = 'close',
 }
