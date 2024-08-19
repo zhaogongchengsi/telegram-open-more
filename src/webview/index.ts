@@ -51,7 +51,7 @@ export class Webview extends EventEmitter<WebviewEvents> {
     this.view = new WebContentsView({
       webPreferences: {
         preload: options.preload,
-        partition: options.partition,
+        partition: `persist:${options.partition}`,
       },
     })
     this.view.webContents.loadURL(options.src)
