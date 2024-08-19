@@ -155,7 +155,6 @@ export class Webview extends EventEmitter<WebviewEvents> {
   }
 
   onUnmount(handle: (id: string) => void) {
-    this.emit('did-start-loading', this.partition)
     this.on('unmount', handle)
   }
 

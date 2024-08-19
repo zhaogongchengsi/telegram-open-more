@@ -12,7 +12,7 @@ export interface TabbarItem {
 export const useTabbar = defineStore('tabbar', () => {
   const data = ref<TabbarItem[]>([])
   const active = ref<TabbarId>(null)
-
+  const deleteEvent = useEventBus<TabbarId>('delete-tabber')
   const setActive = (id: TabbarId) => {
     active.value = id
   }
@@ -53,6 +53,7 @@ export const useTabbar = defineStore('tabbar', () => {
     }
 
     data.value = data.value.filter(item => item.id !== id)
+    deleteEvent.emit(id)
 
     return index
   }
@@ -79,5 +80,6 @@ export const useTabbar = defineStore('tabbar', () => {
     removeTab,
     startSpin,
     stopSpin,
+    deleteEvent,
   }
 })

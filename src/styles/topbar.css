@@ -23,6 +23,11 @@
 			transition: transform 0.2s, width 0.1s;
 		}
 	}
+	.topbar-empty-item {
+		&:before { 
+			display: none !important;
+		}
+	}
 }
 
 .dark {

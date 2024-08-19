@@ -22,3 +22,7 @@ export function showTelegram(id: string, location: UpdateLocation): void {
 export function setActiveTelegram(id: string, oldId: string): void {
   ipc.send(telegram.setActive, id, oldId)
 }
+
+export function closeTelegram(id: string): void {
+  ipc.send(telegram.close, id)
+}

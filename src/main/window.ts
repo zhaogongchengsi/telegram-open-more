@@ -90,6 +90,10 @@ export class MainWindow {
     })
   }
 
+  setAlwaysOnTop(flag: boolean, level?: 'normal' | 'floating' | 'torn-off-menu' | 'modal-panel' | 'main-menu' | 'status' | 'pop-up-menu' | 'screen-saver', relativeLevel?: number) {
+    this.browserWindow.setAlwaysOnTop(flag, level, relativeLevel)
+  }
+
   openDevTools() {
     this.browserWindow.webContents.openDevTools()
   }

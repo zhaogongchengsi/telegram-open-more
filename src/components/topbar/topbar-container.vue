@@ -9,6 +9,11 @@ const props = withDefaults(defineProps<{
 
 const activeLocation = ref<number>(0)
 const activeWidth = ref<number>(0)
+const child = useSlotChild()
+
+const hasActiveChild = computed(() => {
+  return child.value.length > 0
+})
 
 provide('activeLocation', {
   getValue() {
@@ -44,7 +49,7 @@ const topbarStyle = computed(() => {
       <div v-if="$slots.prefix" class="sticky left-0">
         <slot name="prefix" />
       </div>
-      <ul class="topbar-contianer_inner_box no-drag" :style="topbarStyle">
+      <ul class="topbar-contianer_inner_box no-drag" :class="{ 'topbar-empty-item': !hasActiveChild }" :style="topbarStyle">
         <slot />
       </ul>
       <div v-if="$slots.suffix" class="no-drag sticky right-0">
