@@ -1,3 +1,5 @@
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { type BrowserWindow, ipcMain } from 'electron'
 import { telegram } from '~/enums/windows'
 import type { UpdateLocation } from '~/webview'
@@ -9,6 +11,8 @@ export interface TelegramWebviewOptions {
   x: number
   y: number
 }
+
+const _dirname = typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
 
 export class TelegramWebview {
   private readonly src = 'https://web.telegram.org/a'
@@ -30,7 +34,7 @@ export class TelegramWebview {
       y: options.y,
       width: options.width,
       height: options.height,
-      //   preload: undefined,
+      preload: join(_dirname, '../preload/telegram.mjs'),
       partition: id,
     })
     this.webviewCatch.set(id, webview)

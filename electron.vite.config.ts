@@ -35,6 +35,7 @@ export default defineConfig(() => {
         rollupOptions: {
           input: [
             join(src, 'preload.ts'),
+            join(src, 'telegram.ts'),
           ],
         },
       },
