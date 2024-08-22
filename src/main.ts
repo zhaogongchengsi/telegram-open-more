@@ -1,14 +1,17 @@
 import { BrowserWindow, app } from 'electron'
 import { isMacOS } from 'std-env'
 import electronSquirrel from 'electron-squirrel-startup'
+import type { MainWindow } from './main/window'
 import { getMainWindow } from './main/window'
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 
-if (electronSquirrel) {
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (electronSquirrel || !gotTheLock) {
   app.quit()
 }
 
-let mainWindow
+let mainWindow: MainWindow | null = null
 
 function createWindow() {
   // Create the browser window.
@@ -17,6 +20,14 @@ function createWindow() {
     mainWindow.openDevTools()
   }
 }
+
+app.on('second-instance', () => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized())
+      mainWindow.restore()
+    mainWindow.focus()
+  }
+})
 
 app.on('ready', createWindow)
 

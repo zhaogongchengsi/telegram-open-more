@@ -45,6 +45,11 @@ export class MainWindow {
     this.browserWindow = mainWindow
     this.telegramWindow = new TelegramWebview(mainWindow)
 
+    this.init()
+  }
+
+  private init() {
+    const mainWindow = this.browserWindow
     ipcMain.on(windows.minimize, () => {
       this.minimize()
     })
@@ -144,6 +149,14 @@ export class MainWindow {
 
   setBounds(options: Electron.Rectangle) {
     this.browserWindow.setBounds(options)
+  }
+
+  restore() {
+    this.browserWindow.restore()
+  }
+
+  focus() {
+    this.browserWindow.focus()
   }
 }
 
