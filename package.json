@@ -32,6 +32,7 @@
     "dexie": "^4.0.8",
     "electron-squirrel-startup": "^1.0.1",
     "electron-updater": "^6.2.1",
+    "mitt": "^3.0.1",
     "pinia": "^2.2.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.4",

@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, app, ipcMain, nativeImage, nativeTheme } from 'electron'
+import { BrowserWindow, app, globalShortcut, ipcMain, nativeImage, nativeTheme } from 'electron'
 import { isMacOS } from 'std-env'
 import logo from '../../resources/telegram@256x256.png?asset'
 import { TelegramWebview } from './telegram-webview'
@@ -46,6 +46,12 @@ export class MainWindow {
     this.telegramWindow = new TelegramWebview(mainWindow)
 
     this.init()
+
+    if (import.meta.env.DEV) {
+      globalShortcut.register('CommandOrControl+F11', () => {
+        this.telegramWindow.openShowDevTools()
+      })
+    }
   }
 
   private init() {

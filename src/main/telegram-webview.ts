@@ -150,4 +150,8 @@ export class TelegramWebview {
       }
     }
   }
+
+  openShowDevTools() {
+    this.showWebview?.openDevTools()
+  }
 }

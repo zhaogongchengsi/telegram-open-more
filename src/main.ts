@@ -14,7 +14,6 @@ if (electronSquirrel || !gotTheLock) {
 let mainWindow: MainWindow | null = null
 
 function createWindow() {
-  console.log(process.type)
   // Create the browser window.
   mainWindow = getMainWindow({ width: 800, height: 600 })
   if (import.meta.env.DEV) {
