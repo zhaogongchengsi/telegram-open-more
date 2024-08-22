@@ -3,6 +3,7 @@ import { isMacOS } from 'std-env'
 import electronSquirrel from 'electron-squirrel-startup'
 import type { MainWindow } from './main/window'
 import { getMainWindow } from './main/window'
+import { Database } from './main/database'
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 
 const gotTheLock = app.requestSingleInstanceLock()
@@ -12,7 +13,10 @@ if (electronSquirrel || !gotTheLock) {
 }
 
 let mainWindow: MainWindow | null = null
-
+const database: Database = new Database()
+database.on('ready', () => {
+  console.log('database ready')
+})
 function createWindow() {
   // Create the browser window.
   mainWindow = getMainWindow({ width: 800, height: 600 })
@@ -44,6 +48,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

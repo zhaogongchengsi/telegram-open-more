@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@electric-sql/pglite':
+        specifier: ^0.2.3
+        version: 0.2.3
       '@primevue/themes':
         specifier: ^4.0.4
         version: 4.0.4
@@ -333,6 +336,9 @@ packages:
 
   '@dprint/toml@0.6.2':
     resolution: {integrity: sha512-Mk5unEANsL/L+WHYU3NpDXt1ARU5bNU5k5OZELxaJodDycKG6RoRnSlZXpW6+7UN2PSnETAFVUdKrh937ZwtHA==}
+
+  '@electric-sql/pglite@0.2.3':
+    resolution: {integrity: sha512-XqjCfv6Rd6L8sWv2EIyf9PT6H25lxPMPUr7mHQoCI9SvbwYjcaAGc1/cz+4iOszafuec8ms0xi0TnZbQfavChA==}
 
   '@electron/asar@3.2.10':
     resolution: {integrity: sha512-mvBSwIBUeiRscrCeJE1LwctAriBj65eUDm0Pc11iE5gRwzkmsdbS7FnZ1XUWjpSeQWL1L5g12Fc/SchPM9DUOw==}
@@ -3828,6 +3834,8 @@ snapshots:
   '@dprint/markdown@0.17.4': {}
 
   '@dprint/toml@0.6.2': {}
+
+  '@electric-sql/pglite@0.2.3': {}
 
   '@electron/asar@3.2.10':
     dependencies:
