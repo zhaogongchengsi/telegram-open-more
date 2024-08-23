@@ -26,7 +26,6 @@
     "release": "bumpp"
   },
   "dependencies": {
-    "@electric-sql/pglite": "^0.2.3",
     "@primevue/themes": "^4.0.4",
     "@unocss/reset": "^0.62.2",
     "@vueuse/core": "^11.0.0",

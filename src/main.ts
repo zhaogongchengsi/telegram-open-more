@@ -1,9 +1,9 @@
-import { BrowserWindow, app } from 'electron'
+import { BrowserWindow, app, protocol } from 'electron'
 import { isMacOS } from 'std-env'
 import electronSquirrel from 'electron-squirrel-startup'
 import type { MainWindow } from './main/window'
 import { getMainWindow } from './main/window'
-import { Database } from './main/database'
+import { protocol_name } from './common/event/event'
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 
 const gotTheLock = app.requestSingleInstanceLock()
@@ -13,10 +13,7 @@ if (electronSquirrel || !gotTheLock) {
 }
 
 let mainWindow: MainWindow | null = null
-const database: Database = new Database()
-database.on('ready', () => {
-  console.log('database ready')
-})
+// const database: Database = new Database()
 function createWindow() {
   // Create the browser window.
   mainWindow = getMainWindow({ width: 800, height: 600 })
