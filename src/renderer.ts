@@ -9,12 +9,6 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 
-import('electron').then(({ ipcRenderer }) => {
-  ipcRenderer.on('minimize', () => {
-    ipcRenderer.send('minimize')
-  })
-})
-
 const pinia = createPinia()
 const app = createApp(App)
 
