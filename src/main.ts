@@ -3,7 +3,7 @@ import { isMacOS } from 'std-env'
 import electronSquirrel from 'electron-squirrel-startup'
 import type { MainWindow } from './main/window'
 import { getMainWindow } from './main/window'
-import { protocol_name } from './common/event/event'
+import { autoUpdate } from './main/autoupdate'
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 
 const gotTheLock = app.requestSingleInstanceLock()
@@ -17,6 +17,7 @@ let mainWindow: MainWindow | null = null
 function createWindow() {
   // Create the browser window.
   mainWindow = getMainWindow({ width: 800, height: 600 })
+  autoUpdate(mainWindow)
   if (import.meta.env.DEV) {
     mainWindow.openDevTools()
   }
