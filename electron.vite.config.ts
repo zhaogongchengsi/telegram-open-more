@@ -63,7 +63,11 @@ export default defineConfig(() => {
           input: {
             index: resolve(_dirname, 'index.html'),
           },
+          external: ['electron'],
         },
+      },
+      optimizeDeps: {
+        exclude: ['electron'],
       },
     },
   }

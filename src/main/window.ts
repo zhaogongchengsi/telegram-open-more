@@ -98,9 +98,6 @@ export class MainWindow {
       mainWindow.close()
       app.quit()
     })
-    ipcMain.on('telegram', () => {
-      console.log('telegram')
-    })
   }
 
   setAlwaysOnTop(flag: boolean, level?: 'normal' | 'floating' | 'torn-off-menu' | 'modal-panel' | 'main-menu' | 'status' | 'pop-up-menu' | 'screen-saver', relativeLevel?: number) {
