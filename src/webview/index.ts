@@ -11,6 +11,8 @@ export interface WebviewOptions {
   height?: number
   preload?: string
   partition?: string
+  contextIsolation?: boolean
+  nodeIntegration?: boolean
 }
 
 export type ViewLocation = Pick<WebviewOptions, 'x' | 'y' | 'width' | 'height'>
@@ -52,6 +54,8 @@ export class Webview extends EventEmitter<WebviewEvents> {
       webPreferences: {
         preload: options.preload,
         partition: `persist:${options.partition}`,
+        contextIsolation: options.contextIsolation,
+        nodeIntegration: options.nodeIntegration,
       },
     })
     this.view.webContents.loadURL(options.src)

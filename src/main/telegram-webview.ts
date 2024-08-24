@@ -36,6 +36,8 @@ export class TelegramWebview {
       height: options.height,
       preload: join(_dirname, '../preload/telegram.mjs'),
       partition: id,
+      contextIsolation: false,
+      nodeIntegration: true,
     })
     this.webviewCatch.set(id, webview)
     webview.on('did-start-loading', (id) => {

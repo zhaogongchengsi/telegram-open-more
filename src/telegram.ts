@@ -1,2 +1,3 @@
-/* eslint-disable no-console */
-console.log('telegram.ts')
+import { ipcRenderer } from 'electron'
+
+ipcRenderer.send('telegram')

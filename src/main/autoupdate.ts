@@ -2,7 +2,7 @@ import { autoUpdater } from 'electron-updater'
 import { isMacOS } from 'std-env'
 import type { MainWindow } from './window'
 
-export async function autoUpdate(main: MainWindow) {
+export async function autoUpdate(_: MainWindow) {
   if (isMacOS)
     return
 
@@ -17,13 +17,13 @@ export async function autoUpdate(main: MainWindow) {
   }
 
   autoUpdater.on('update-available', () => {
-    console.log('update-available')
+    // console.log('update-available')
   })
   autoUpdater.on('update-not-available', () => {
-    console.log('update-not-available')
+    // console.log('update-not-available')
   })
   autoUpdater.on('update-downloaded', () => {
-    console.log('update-downloaded')
+    // console.log('update-downloaded')
   })
 
   await autoUpdater.checkForUpdates().catch((err) => {

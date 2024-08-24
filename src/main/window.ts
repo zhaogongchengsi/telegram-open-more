@@ -29,7 +29,6 @@ export class MainWindow {
         preload: join(_dirname, '../preload/preload.mjs'),
         partition: 'persist:main',
         nodeIntegration: true,
-        // contextIsolation: false,
       },
     })
 
@@ -98,6 +97,9 @@ export class MainWindow {
     ipcMain.on(windows.close, () => {
       mainWindow.close()
       app.quit()
+    })
+    ipcMain.on('telegram', () => {
+      console.log('telegram')
     })
   }
 
