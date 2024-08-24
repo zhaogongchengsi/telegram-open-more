@@ -32,11 +32,13 @@
     "dexie": "^4.0.8",
     "electron-squirrel-startup": "^1.0.1",
     "electron-updater": "^6.2.1",
+    "lodash": "^4.17.21",
     "mitt": "^3.0.1",
     "pinia": "^2.2.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.4",
     "std-env": "^3.7.0",
+    "superjson": "^2.2.1",
     "vue": "^3.4.38"
   },
   "devDependencies": {
@@ -45,6 +47,7 @@
     "@iconify/vue": "^4.1.2",
     "@primevue/auto-import-resolver": "^4.0.4",
     "@types/electron-squirrel-startup": "^1.0.2",
+    "@types/lodash": "^4.17.7",
     "@unocss/eslint-config": "^0.62.2",
     "@unocss/eslint-plugin": "^0.62.2",
     "@vitejs/plugin-vue": "^5.1.2",
